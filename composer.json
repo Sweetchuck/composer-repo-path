@@ -1,0 +1,67 @@
+{
+    "type": "composer-plugin",
+    "name": "sweetchuck/composer-repo-path",
+    "description": "@todo project description",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Dávid Andor",
+            "role": "Maintainer",
+            "homepage": "https://github.com/Sweetchuck"
+        }
+    ],
+    "homepage": "https://github.com/Sweetchuck/composer-repo-path",
+    "support": {
+        "source": "https://github.com/Sweetchuck/composer-repo-path",
+        "issues": "https://github.com/Sweetchuck/composer-repo-path/issues"
+    },
+    "license": "GPL-3.0-or-later",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "bin-dir": "bin",
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "repositories": {},
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "composer-plugin-api": "^2.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.1",
+        "codeception/module-cli": "^1.1",
+        "codeception/module-filesystem": "^1.0",
+        "composer/composer": "^2.0",
+        "mikey179/vfsstream": "^1.6",
+        "nuvoleweb/robo-config": "2.x-dev",
+        "squizlabs/php_codesniffer": "^3.5",
+        "stecman/symfony-console-completion": "^0.11.0",
+        "sweetchuck/git-hooks": "2.x-dev",
+        "sweetchuck/robo-git": "1.x-dev",
+        "sweetchuck/robo-phpcs": "1.x-dev",
+        "sweetchuck/robo-phpmd": "1.x-dev",
+        "symfony/error-handler": "^5.0",
+        "symfony/filesystem": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sweetchuck\\ComposerRepoPath\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sweetchuck\\ComposerRepoPath\\Test\\": "tests/_support/",
+            "Sweetchuck\\ComposerRepoPath\\Tests\\Acceptance\\": "tests/acceptance/",
+            "Sweetchuck\\ComposerRepoPath\\Tests\\Unit\\": "tests/unit/"
+        }
+    },
+    "extra": {
+        "class": "\\Sweetchuck\\ComposerRepoPath\\Composer\\Plugin"
+    },
+    "scripts": {},
+    "scripts-descriptions": {}
+}

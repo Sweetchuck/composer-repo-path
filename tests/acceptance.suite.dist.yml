@@ -1,0 +1,7 @@
+
+actor: 'AcceptanceTester'
+modules:
+    enabled:
+        - 'Filesystem'
+        - 'Cli'
+        - '\Sweetchuck\ComposerRepoPath\Test\Helper\Acceptance'
