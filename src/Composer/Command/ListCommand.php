@@ -7,7 +7,7 @@ namespace Sweetchuck\ComposerRepoPath\Composer\Command;
 use Composer\Factory as ComposerFactory;
 use Sweetchuck\ComposerRepoPath\Handler;
 
-class DownloadCommand extends CommandBase
+class ListCommand extends CommandBase
 {
 
     protected Handler $handler;
@@ -27,12 +27,12 @@ class DownloadCommand extends CommandBase
     {
         parent::configure();
         if (!$this->getName()) {
-            $this->setName('repo-path:download');
+            $this->setName('repo-path:list');
         }
 
         // @todo Better description and help.
-        $this->setDescription('Prepares the missing "path" repositories.');
-        $this->setHelp('Prepares the missing "path" repositories.');
+        $this->setDescription('Lists "path" repositories.');
+        $this->setHelp('Lists "path" repositories.');
     }
 
     protected function doIt()
@@ -45,8 +45,16 @@ class DownloadCommand extends CommandBase
         $this->handler->setOutput($this->getOutput());
         $this->handler->setProcessHelper($this->getHelper('process'));
 
-        $repositories = $this->handler->getRepositories(ComposerFactory::getComposerFile());
-        $this->handler->downloadRepositories($repositories);
+        $repositories = array_filter(
+            $this->handler->getRepositories(ComposerFactory::getComposerFile()),
+            $this->handler->getRepositoryTypeFilter(),
+        );
+
+        $packageNames = $this->handler->getPackageNames($repositories);
+        $output = $this->getOutput();
+        foreach ($packageNames as $packageName) {
+            $output->writeln($packageName);
+        }
 
         return $this;
     }

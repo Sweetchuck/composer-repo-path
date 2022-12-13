@@ -12,11 +12,26 @@ use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Helper\ProcessHelper;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Path;
 
 class Handler implements LoggerAwareInterface
 {
 
     protected string $logEntryPrefix = 'local path repository';
+
+    protected string $baseDir = '.';
+
+    public function getBaseDir(): string
+    {
+        return $this->baseDir;
+    }
+
+    public function setBaseDir(string $dir)
+    {
+        $this->baseDir = $dir;
+
+        return $this;
+    }
 
     protected LoggerInterface $logger;
 
@@ -155,6 +170,37 @@ class Handler implements LoggerAwareInterface
         return $this;
     }
 
+    public function getPackageNames(array $repositories): array
+    {
+        $names = [];
+        foreach ($repositories as $key => $repository) {
+            $names[$key] = $this->getPackageName(
+                $repository,
+                is_numeric($key) ? null : $key,
+            );
+        }
+
+        return $names;
+    }
+
+    public function getPackageName(array $repository, ?string $default = null): string
+    {
+        assert($repository['type'] === 'path', "{$repository['type']} is not my type");
+
+        $composerFileName = Path::join(
+            $this->getBaseDir(),
+            $repository['url'],
+            'composer.json',
+        );
+        $composerData = file_exists($composerFileName) ?
+            (file_get_contents($composerFileName) ?: '{}')
+            : json_encode(['name' => $default]);
+        $package = json_decode($composerData, true);
+        settype($package['name'], 'string');
+
+        return $package['name'] ?: $default;
+    }
+
     protected function gitClone(array $repository)
     {
         $process = $this->getProcessHelper()->run(
@@ -230,7 +276,7 @@ class Handler implements LoggerAwareInterface
         ];
     }
 
-    protected function getRepositoryTypeFilter(array $allowedTypes): \Closure
+    public function getRepositoryTypeFilter(array $allowedTypes = ['path']): \Closure
     {
         return function (array $repository) use ($allowedTypes) {
             return in_array($repository['type'] ?? '', $allowedTypes);

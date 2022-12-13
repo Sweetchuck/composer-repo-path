@@ -6,6 +6,7 @@ namespace Sweetchuck\ComposerRepoPath\Composer;
 
 use Composer\Plugin\Capability\CommandProvider as ComposerCommandProvider;
 use Sweetchuck\ComposerRepoPath\Composer\Command\DownloadCommand;
+use Sweetchuck\ComposerRepoPath\Composer\Command\ListCommand;
 
 class CommandProvider implements ComposerCommandProvider
 {
@@ -16,6 +17,7 @@ class CommandProvider implements ComposerCommandProvider
     {
         return [
             new DownloadCommand(),
+            new ListCommand(),
         ];
     }
 }

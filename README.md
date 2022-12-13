@@ -71,8 +71,7 @@ When `composer update` command runs first time in a clean project, then the
 `../../foo/bar-1.x` directory is not exists, then the Composer will throw an
 error.
 
-The [composer-suite](https://github.com/Sweetchuck/composer-suite) plugin helps
-to solve this problem.
+The [composer-suite] plugin helps to solve this problem.
 
 1. `cd somewhere/my/project-01`
 2. composer.json
@@ -82,7 +81,13 @@ to solve this problem.
        "minimum-stability": "dev",
        "prefer-stable": true,
        "config": {
-           "preferred-install": "dist"
+           "allow-plugins": {
+               "sweetchuck/composer-repo-path": true,
+               "sweetchuck/composer-suite": true
+           },
+           "preferred-install": {
+               "*": "dist"
+           }
        },
        "repositories": {},
        "require": {
@@ -134,38 +139,9 @@ to solve this problem.
 3. `composer update`
 4. `composer suite:generate`
 5. optional: `COMPOSER='composer.local.json' composer repo-path:download`
-6. `COMPOSER='composer.local.json' composer update`
+6. `COMPOSER='composer.local.json' composer update $(composer run suite:changed-packages:list)`
 
 
-## @TODO
+---
 
-
-### Command - composer repo-path:list
-
-List all the packages that are installed by symlinks.
-
-Example: `composer repo-path:list
-
-Example output: space separated package names.
-
-> foo/bar baz/doo tab/fal
-
---format='json|yaml|csv' option would be handy.
-
-Together with [Sweetchuck/composer-suite](https://github.com/Sweetchuck/composer-suite)
-```json
-{
-  "scripts": {
-    "suite:install:local": [
-      "rm composer.local.json composer.local.lock",
-      "composer suite:generate",
-      "cp composer.lock composer.local.lock",
-      "COMPOSER='composer.local.lock' composer update $(composer repo-path:list)"
-    ],
-    "suite:reset": [
-      "rm $(COMPOSER='composer.local.lock' composer repo-path:list --format=json | jq 'find install dirs of the symlinked packages')",
-      "composer install"
-    ]
-  }
-}
-```
+[composer-suite]: https://github.com/Sweetchuck/composer-suite
