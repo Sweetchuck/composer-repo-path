@@ -44,7 +44,7 @@ an early phase by subscribing to the "pre command" events.
                "url": "../../foo/bar-1.x",
                "options": {
                     "repo-path": {
-                        "url": "git@example.com:foo/bar.git",
+                        "url": "http://example.com/foo/bar.git",
                         "branch": "1.x"
                     }
                } 
@@ -94,36 +94,39 @@ to solve this problem.
        },
        "extra": {
           "composer-suite": {
-              "local": [
-                  {
-                      "type": "prepend",
-                      "config": {
-                          "parents": ["repositories"],
-                          "items": {
-                              "foo/bar": {
-                                  "type": "path",
-                                  "url": "",
-                                  "options": {
-                                      "repo-path": {
-                                          "url": "git@example.com:foo/bar.git",
-                                          "remote": "upstream",
-                                          "branch": "1.x"
+              "local": {
+                  "description": "Modifications for local development",
+                  "actions": [
+                      {
+                          "type": "prepend",
+                          "config": {
+                              "parents": ["repositories"],
+                              "items": {
+                                  "foo/bar": {
+                                      "type": "path",
+                                      "url": "",
+                                      "options": {
+                                          "repo-path": {
+                                              "url": "https://example.com/foo/bar.git",
+                                              "remote": "upstream",
+                                              "branch": "1.x"
+                                          }
                                       }
                                   }
                               }
                           }
-                      }
-                  },
-                  {
-                      "type": "replaceRecursive",
-                      "config": {
-                          "parents": ["require"],
-                          "items": {
-                              "foo/bar": "*"
+                      },
+                      {
+                          "type": "replaceRecursive",
+                          "config": {
+                              "parents": ["require"],
+                              "items": {
+                                  "foo/bar": "*"
+                              }
                           }
                       }
-                  }
-              ]
+                  ]
+              }
           }
        }
    }
