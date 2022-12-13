@@ -39,16 +39,20 @@ class AcceptanceTester extends Actor
 
     public function canSeeFileIsSymlink(
         string $filename,
-        ?string $pointsTo = null
+        ?string $pointsTo = null,
+        ?string $message = null
     ) {
-        Assert::assertFileExists($filename);
+        if ($message === null) {
+            $message = "$filename is symlink" .($pointsTo === null ? '' : " and points to $pointsTo");
+        }
+        Assert::assertFileExists($filename, "$message - exists");
         $actualPointsTo = readlink($filename);
-        Assert::assertNotFalse($actualPointsTo);
+        Assert::assertNotFalse($actualPointsTo, "$message - link");
         if ($pointsTo !== null) {
             Assert::assertSame(
-                $actualPointsTo,
                 $pointsTo,
-                "$filename symlink points to $pointsTo",
+                $actualPointsTo,
+                "$message - destination is correct",
             );
         }
     }

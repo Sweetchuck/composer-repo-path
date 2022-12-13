@@ -33,7 +33,7 @@ class PrepareGlobalCest extends CestBase
         $I->canSeeDirFound("{$this->packagesDir}/sweetchuck/utils-1.x/.git");
         $I->canSeeFileIsSymlink(
             "{$this->projectDir}/vendor/sweetchuck/utils",
-            "../../../packages/sweetchuck/utils-1.x",
+            "../../../packages/sweetchuck/utils-1.x/",
         );
     }
 }

@@ -37,7 +37,7 @@ class PrepareProjectCest extends CestBase
         $I->runShellCommand("cd $prSafe && $envVars composer update", true);
         $I->canSeeFileIsSymlink(
             "{$this->projectDir}/vendor/sweetchuck/utils",
-            "../../../packages/sweetchuck/utils-1.x",
+            "../../../packages/sweetchuck/utils-1.x/",
         );
 
         $I->deleteDir($this->packagesDir);
@@ -45,7 +45,7 @@ class PrepareProjectCest extends CestBase
         $I->canSeeDirFound("{$this->packagesDir}/sweetchuck/utils-1.x/.git");
         $I->canSeeFileIsSymlink(
             "{$this->projectDir}/vendor/sweetchuck/utils",
-            "../../../packages/sweetchuck/utils-1.x",
+            "../../../packages/sweetchuck/utils-1.x/",
         );
     }
 }

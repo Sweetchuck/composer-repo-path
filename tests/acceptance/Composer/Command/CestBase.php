@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace Sweetchuck\ComposerRepoPath\Tests\Acceptance\Composer\Command;
 
 use Symfony\Component\Filesystem\Filesystem;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 abstract class CestBase
 {
@@ -29,9 +29,13 @@ abstract class CestBase
         'minimum-stability' => 'dev',
         'prefer-stable' => true,
         'config' => [
+            'allow-plugins' => [
+                'sweetchuck/composer-repo-path' => true,
+                'sweetchuck/composer-suite' => true,
+            ],
             'notify-on-install' => false,
             'optimize-autoloader' => true,
-            'preferred-install' => "dist",
+            'preferred-install' => 'dist',
             'sort-packages' => true,
         ],
         'repositories' => [],
@@ -52,7 +56,7 @@ abstract class CestBase
         $this->jsonEncodeFlags = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES | \JSON_PRETTY_PRINT;
         $this->selfVendor = 'sweetchuck';
         $this->selfName = 'composer-repo-path';
-        $this->selfDistFile = "{$this->selfVendor}-{$this->selfName}-dev-";
+        $this->selfDistFile = "{$this->selfVendor}-{$this->selfName}-dev";
         $this->selfDistFormat = 'zip';
         $this->caseDir = tempnam(sys_get_temp_dir(), "{$this->selfName}-");
         $this->fs = new Filesystem();
@@ -137,18 +141,21 @@ abstract class CestBase
     {
         $composerJson['require-dev']['sweetchuck/composer-suite'] = '1.x-dev';
         $composerJson['extra']['composer-suite']['local'] = [
-            [
-                'type' => 'prepend',
-                'config' => [
-                    'parents' => ['repositories'],
-                    'items' => $this->libRepositories(),
+            'description' => 'Dummy',
+            'actions' => [
+                [
+                    'type' => 'prepend',
+                    'config' => [
+                        'parents' => ['repositories'],
+                        'items' => $this->libRepositories(),
+                    ],
                 ],
-            ],
-            [
-                'type' => 'replaceRecursive',
-                'config' => [
-                    'parents' => ['require-dev'],
-                    'items' => $this->libRequire(),
+                [
+                    'type' => 'replaceRecursive',
+                    'config' => [
+                        'parents' => ['require-dev'],
+                        'items' => $this->libRequire(),
+                    ],
                 ],
             ],
         ];

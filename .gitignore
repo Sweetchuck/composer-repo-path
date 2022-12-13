@@ -1,19 +1,18 @@
-
-/bin/
-
-/reports/
-
-/tests/_data/fixtures/project-template/*/vendor/
 /tests/_envs/*.local.yml
-/tests/_output/
+/tests/_log/
 /tests/_support/_generated/
 /tests/*.suite.yml
+/codeception.yml
 
-/vendor/
 
 /.git-hooks-local
-/codeception.yml
+
 /phpcs.xml
+
 /robo.yml
+
+/vendor/
 /sweetchuck-composer-repo-path-*.tar
+/sweetchuck-composer-repo-path-*.tar.bz2
+/sweetchuck-composer-repo-path-*.tar.gz
 /sweetchuck-composer-repo-path-*.zip
