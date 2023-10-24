@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "513b593a2cf40c57207b600902fd93e1",
+    "content-hash": "b1980e92bcf4a6fb64a6f4abd41eafae",
     "packages": [],
     "packages-dev": [
         {
@@ -4632,73 +4632,6 @@
             "time": "2022-12-07T22:29:00+00:00"
         },
         {
-            "name": "sweetchuck/utils",
-            "version": "1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sweetchuck/utils.git",
-                "reference": "252c52475f1c639e93ac218c5abb2729f245a92e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sweetchuck/utils/zipball/252c52475f1c639e93ac218c5abb2729f245a92e",
-                "reference": "252c52475f1c639e93ac218c5abb2729f245a92e",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.4",
-                "symfony/filesystem": "^4.1 || ^5.0 || ^6.0"
-            },
-            "require-dev": {
-                "codeception/codeception": "^4.0",
-                "codeception/module-asserts": "^1.1",
-                "consolidation/robo": "^3.0",
-                "mikey179/vfsstream": "^1.6",
-                "nuvoleweb/robo-config": "3.x-dev",
-                "phpmd/phpmd": "^2.10",
-                "squizlabs/php_codesniffer": "^3.5",
-                "sweetchuck/git-hooks": "2.x-dev",
-                "sweetchuck/robo-git": "2.x-dev",
-                "sweetchuck/robo-phpcs": "2.x-dev",
-                "sweetchuck/robo-phpmd": "2.x-dev"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Sweetchuck\\Utils\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Andor",
-                    "homepage": "https://github.com/Sweetchuck",
-                    "role": "Maintainer"
-                }
-            ],
-            "description": "Common utils",
-            "homepage": "https://github.com/Sweetchuck/utils",
-            "keywords": [
-                "comparer",
-                "filesystem",
-                "filter",
-                "iterator",
-                "string formatter",
-                "version number",
-                "walker"
-            ],
-            "support": {
-                "issues": "https://github.com/Sweetchuck/utils/issues",
-                "source": "https://github.com/Sweetchuck/utils"
-            },
-            "time": "2022-12-07T20:00:06+00:00"
-        },
-        {
             "name": "symfony/console",
             "version": "v5.4.16",
             "source": {
@@ -6236,8 +6169,7 @@
         "sweetchuck/git-hooks": 20,
         "sweetchuck/robo-git": 20,
         "sweetchuck/robo-phpcs": 20,
-        "sweetchuck/robo-phpmd": 20,
-        "sweetchuck/utils": 20
+        "sweetchuck/robo-phpmd": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -6247,5 +6179,5 @@
         "composer-plugin-api": "^2.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
