@@ -20,14 +20,9 @@ abstract class CommandBase extends BaseCommand implements InputAwareInterface
         return $this->input;
     }
 
-    /**
-     * @return $this
-     */
-    public function setInput(InputInterface $input)
+    public function setInput(InputInterface $input): void
     {
         $this->input = $input;
-
-        return $this;
     }
 
     protected OutputInterface $output;
@@ -37,10 +32,7 @@ abstract class CommandBase extends BaseCommand implements InputAwareInterface
         return $this->output;
     }
 
-    /**
-     * @return $this
-     */
-    public function setOutput(OutputInterface $output)
+    public function setOutput(OutputInterface $output): static
     {
         $this->output = $output;
 
@@ -50,11 +42,11 @@ abstract class CommandBase extends BaseCommand implements InputAwareInterface
     /**
      * {@inheritDoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
+            $this->setInput($input);
             $this
-                ->setInput($input)
                 ->setOutput($output)
                 ->doIt();
         } catch (\Exception $e) {
@@ -66,8 +58,5 @@ abstract class CommandBase extends BaseCommand implements InputAwareInterface
         return $this->result['exitCode'];
     }
 
-    /**
-     * @return $this
-     */
-    abstract protected function doIt();
+    abstract protected function doIt(): static;
 }

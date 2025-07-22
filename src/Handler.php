@@ -18,7 +18,7 @@ class Handler implements LoggerAwareInterface
 
     protected string $logEntryPrefix = 'local path repository';
 
-    protected LoggerInterface $logger;
+    protected ?LoggerInterface $logger = null;
 
     public function getLogger(): LoggerInterface
     {
@@ -29,11 +29,9 @@ class Handler implements LoggerAwareInterface
         return $this->logger;
     }
 
-    public function setLogger(LoggerInterface $value)
+    public function setLogger(LoggerInterface $logger): void
     {
-        $this->logger = $value;
-
-        return $this;
+        $this->logger = $logger;
     }
 
     protected ?ProcessHelper $processHelper;
@@ -43,14 +41,14 @@ class Handler implements LoggerAwareInterface
         return $this->processHelper;
     }
 
-    public function setProcessHelper(?ProcessHelper $value)
+    public function setProcessHelper(?ProcessHelper $value): static
     {
         $this->processHelper = $value;
 
         return $this;
     }
 
-    protected OutputInterface $output;
+    protected ?OutputInterface $output = null;
 
     public function getOutput(): OutputInterface
     {
@@ -61,7 +59,7 @@ class Handler implements LoggerAwareInterface
         return $this->output;
     }
 
-    public function setOutput(OutputInterface $value)
+    public function setOutput(OutputInterface $value): static
     {
         $this->output = $value;
 
@@ -95,7 +93,7 @@ class Handler implements LoggerAwareInterface
         return $composerData['repositories'] ?? [];
     }
 
-    public function downloadRepositories(array $repositories)
+    public function downloadRepositories(array $repositories): static
     {
         $repositories = array_filter(
             $repositories,
@@ -155,7 +153,7 @@ class Handler implements LoggerAwareInterface
         return $this;
     }
 
-    protected function gitClone(array $repository)
+    protected function gitClone(array $repository): static
     {
         $process = $this->getProcessHelper()->run(
             $this->getOutput(),

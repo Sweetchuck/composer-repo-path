@@ -154,9 +154,8 @@ class HandlerTest extends TestBase
 
         $handler = (new Handler($processHelper))
             ->setProcessHelper($processHelper)
-            ->setLogger($logger)
             ->setOutput($output);
-
+        $handler->setLogger($logger);
         $handler->downloadRepositories($repositories);
 
         $this->tester->assertSame($expected['logEntries'], $logger->cleanLogs());

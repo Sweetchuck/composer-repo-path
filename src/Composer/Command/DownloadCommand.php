@@ -13,8 +13,8 @@ class DownloadCommand extends CommandBase
     protected Handler $handler;
 
     public function __construct(
-        string $name = null,
-        ?Handler $handler = null
+        ?string $name = null,
+        ?Handler $handler = null,
     ) {
         $this->handler = $handler ?: new Handler();
         parent::__construct($name);
@@ -35,7 +35,7 @@ class DownloadCommand extends CommandBase
         $this->setHelp('Prepares the missing "path" repositories.');
     }
 
-    protected function doIt()
+    protected function doIt(): static
     {
         $this->result = [
             'exitCode' => 0,

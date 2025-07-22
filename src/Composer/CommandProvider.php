@@ -10,7 +10,7 @@ use Sweetchuck\ComposerRepoPath\Composer\Command\DownloadCommand;
 class CommandProvider implements ComposerCommandProvider
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getCommands()
     {

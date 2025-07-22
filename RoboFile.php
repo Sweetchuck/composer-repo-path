@@ -458,7 +458,7 @@ class RoboFile extends Tasks implements LoggerAwareInterface, ConfigAwareInterfa
 
         return !empty($this->codeceptionInfo['paths']['log']) ?
             $this->codeceptionInfo['paths']['log']
-            : 'tests/_log';
+            : 'tests/_output';
     }
 
     protected function getCodeceptionSuiteNames(): array

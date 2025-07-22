@@ -1,7 +1,7 @@
 # Sweetchuck/composer-repo-path
 
-[![CircleCI](https://circleci.com/gh/Sweetchuck/composer-repo-path/tree/1.x.svg?style=svg)](https://circleci.com/gh/Sweetchuck/composer-repo-path/?branch=1.x)
-[![codecov](https://codecov.io/gh/Sweetchuck/composer-repo-path/branch/1.x/graph/badge.svg?token=J4L164YSGO)](https://app.codecov.io/gh/Sweetchuck/composer-repo-path/branch/1.x)
+[![CircleCI](https://circleci.com/gh/Sweetchuck/composer-repo-path/tree/2.x.svg?style=svg)](https://circleci.com/gh/Sweetchuck/composer-repo-path/?branch=2.x)
+[![codecov](https://codecov.io/gh/Sweetchuck/composer-repo-path/branch/2.x/graph/badge.svg?token=J4L164YSGO)](https://app.codecov.io/gh/Sweetchuck/composer-repo-path/branch/2.x)
 
 Composer plugin to download packages which are referenced in
 `composer.json#/repositories` with type "path".

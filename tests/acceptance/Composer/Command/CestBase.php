@@ -117,7 +117,7 @@ abstract class CestBase
             'type' => 'package',
             'package' => json_decode(file_get_contents('./composer.json'), true),
         ];
-        $repo['package']['version'] = '1.0.0';
+        $repo['package']['version'] = '2.0.0';
         $repo['package']['dist'] = [
             'type' => $this->selfDistFormat,
             'url' => "file://$selfProjectRoot/{$this->selfDistFile}.{$this->selfDistFormat}",
@@ -139,7 +139,7 @@ abstract class CestBase
 
     protected function addLibAsSuiteToComposerJson(array &$composerJson)
     {
-        $composerJson['require-dev']['sweetchuck/composer-suite'] = '1.x-dev';
+        $composerJson['require-dev']['sweetchuck/composer-suite'] = '2.x-dev';
         $composerJson['extra']['composer-suite']['local'] = [
             'description' => 'Dummy',
             'actions' => [

@@ -30,7 +30,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
     /**
      * {@inheritDoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             PluginEvents::COMMAND => 'onCommandEvent',
@@ -45,7 +45,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
     /**
      * {@inheritDoc}
      */
-    public function getCapabilities()
+    public function getCapabilities(): array
     {
         return [
             ComposerCommandProvider::class => CommandProvider::class,
@@ -55,7 +55,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
     /**
      * {@inheritDoc}
      */
-    public function activate(Composer $composer, IOInterface $io)
+    public function activate(Composer $composer, IOInterface $io): void
     {
         // Nothing to do here.
         $this->composer = $composer;
@@ -65,7 +65,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
     /**
      * {@inheritDoc}
      */
-    public function deactivate(Composer $composer, IOInterface $io)
+    public function deactivate(Composer $composer, IOInterface $io): void
     {
         // Nothing to do here.
         $this->composer = $composer;
@@ -75,7 +75,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
     /**
      * {@inheritDoc}
      */
-    public function uninstall(Composer $composer, IOInterface $io)
+    public function uninstall(Composer $composer, IOInterface $io): void
     {
         // Nothing to do here.
         $this->composer = $composer;
@@ -84,13 +84,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface, Capable
 
     public function onCommandEvent(CommandEvent $event): bool
     {
-        switch ($event->getCommandName()) {
-            case 'install':
-            case 'update':
-                return $this->onCommandEventInstall($event);
-        }
-
-        return true;
+        return match ($event->getCommandName()) {
+            'install',
+            'update' => $this->onCommandEventInstall($event),
+            default => true,
+        };
     }
 
     protected function onCommandEventInstall(CommandEvent $event): bool
